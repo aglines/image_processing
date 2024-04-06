@@ -1,7 +1,7 @@
 # image_processing
-- I play around sometimes with AI image generation, and I even create my own models. Sometimes I want to publish these or send them out
-- But I process them first: sometimes the images are of my family or myself, or I don't want them used to train another AI
-- This code does some of these steps to save time
+- I play around sometimes with AI image generation. Sometimes I want to publish these or send them out
+- But they need processing first: sometimes the images are personal, my family, etc, or I don't want them used to train another AI
+- This code performs some of these steps, to save time
 
 # DONE
 - apply a watermark to an image
@@ -26,5 +26,5 @@
 
 # Project notes
 ## Switched to using python Pillow from Gimp's Python-fu. Why?
-- Gimp Python-fu still only uses 2.7 (afaict) - so uhh... the next line is obvious
-- Pillow == better, more, & newer documentation, larger active community etc etc
+- Gimp Python-fu still only uses 2.7 (afaict) - easier to work with modern tools
+- Pillow: better, more, & newer documentation, larger active community etc
