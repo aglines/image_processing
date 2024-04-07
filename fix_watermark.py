@@ -18,7 +18,7 @@ def fix_mark(processing_folder, tools_folder, output_folder, img_flip_counter):
 
         # Image must be square; if not, skip it
         if dimensions[0] != dimensions[1]:
-            logger.error(f"Not a square image. Skipping : {basefile}")
+            logger.warning(f"Not a square image. Skipping file {basefile}")
             continue
         else: image_copy = base_image.copy()
 
@@ -27,10 +27,10 @@ def fix_mark(processing_folder, tools_folder, output_folder, img_flip_counter):
             watermark_path = tools_folder + f"/watermark_{dimensions[0]}.png"
             watermark = Image.open(watermark_path)
         except FileNotFoundError:
-            logger.exception(f"Need watermark for size {dimensions[0]}.  Skipping file, watermark not found for {basefile}")
+            logger.warning(f"Need watermark for size {dimensions[0]}.  Skipping image {basefile}")
             continue
 
-        logger.info('Initial image checks OK. Image processing started.')
+        logger.info(f"Initial checks OK. Processing started for image {basefile}")
 
         try:
             # Flip the img every so often
@@ -47,12 +47,12 @@ def fix_mark(processing_folder, tools_folder, output_folder, img_flip_counter):
             # Erases potentially sensitive PNG info
             image_copy.info = {}
             image_copy.save(output_folder + "/" + new_uuid + "_marked.png")
-            logger.info(f"Image processed, saved as {new_uuid}, for file : {basefile}")
 
             base_image.close()
             image_copy.close()
             watermark.close()
-            logger.info(f"Image processing completed for : {basefile}")
+            logger.info(f"Processing done, saved as {new_uuid}, for file {basefile}")
+
         except Exception as e:
             logger.exception(f"Error processing image: {basefile}")
     return
@@ -60,7 +60,9 @@ def fix_mark(processing_folder, tools_folder, output_folder, img_flip_counter):
 if __name__ == "__main__":
     now = datetime.now()
     now_str = now.strftime("%Y-%m-%d_%H-%M-%S")
-    logging.basicConfig(filename=f'../image_processing/arkiv/app_{now_str}.log', filemode='w', format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    logging.basicConfig(filename=f'../image_processing/arkiv/app_{now_str}.log',
+     filemode='w', format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+     level=logging.INFO)
     
     img_flip_counter = 1  # flip the image every N times (TBD)
 

@@ -12,11 +12,9 @@
 - watermarked copy erases metadata
 - watermarked copy saved to a diff folder for other processing (TBD)
 - basic exception handling
-- basic logging committed to test branch
+- better logging committed to logging branch: set levels, handles specific FileNotFound exception
 
 # TO DO
-- logging - need better exception handling in watermark not found
-- logging - logs aren't showing levels below error
 - shorten basefile name to human-readable lengths (basefile name can incl prompt info which maxes out filename limits)
     - 11 char. 5 digits then hyphen then 10 digits. enough to ID visually
 - save dimensions into saved filename
