@@ -26,7 +26,7 @@ def fix_mark(processing_folder, tools_folder, output_folder, img_flip_counter):
         try:
             watermark_path = tools_folder + f"/watermark_{dimensions[0]}.png"
             watermark = Image.open(watermark_path)
-        except:
+        except FileNotFoundError:
             logger.exception(f"Need watermark for size {dimensions[0]}.  Skipping file, watermark not found for {basefile}")
             continue
 
@@ -60,7 +60,7 @@ def fix_mark(processing_folder, tools_folder, output_folder, img_flip_counter):
 if __name__ == "__main__":
     now = datetime.now()
     now_str = now.strftime("%Y-%m-%d_%H-%M-%S")
-    logging.basicConfig(filename=f'../image_processing/arkiv/app_{now_str}.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s')
+    logging.basicConfig(filename=f'../image_processing/arkiv/app_{now_str}.log', filemode='w', format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     
     img_flip_counter = 1  # flip the image every N times (TBD)
 
